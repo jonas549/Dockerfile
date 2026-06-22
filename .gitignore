@@ -1,0 +1,8 @@
+# Backups y zips pesados (NO subir al repo)
+*.zip
+Rackline*.zip
+*by lewis*.zip
+assets.zip
+
+# Archivos sueltos / temporales
+.thumbnail

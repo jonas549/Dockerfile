@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rackline — Fabricación nacional de racks industriales con norma sísmica certificada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --surface:#F8F9FF;
+    --surface-2:#EEF0F7;
+    --ink:#0B1C30;
+    --ink-2:#1E2E45;
+    --muted:#5A6A82;
+    --line:#E2E6F0;
+    --orange:#EA580C;
+    --orange-700:#C44A09;
+    --yellow:#A67E00;
+    --yellow-soft:#F6E27A;
+    --ok:#15803D;
+    --radius:8px;
+    --shadow-sm: 0 1px 2px rgba(11,28,48,.06), 0 1px 1px rgba(11,28,48,.04);
+    --shadow-md: 0 8px 24px -8px rgba(11,28,48,.15), 0 2px 6px rgba(11,28,48,.06);
+    --shadow-lg: 0 24px 48px -12px rgba(11,28,48,.25);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    color:var(--ink);
+    background:var(--surface);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;cursor:pointer}
+  .container{max-width:1240px;margin:0 auto;padding:0 24px}
+
+  /* ===== NAV ===== */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:saturate(180%) blur(14px);
+    background:rgba(248,249,255,.85);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .nav-logo{height:32px;width:auto}
+  .nav-links{display:flex;gap:36px;align-items:center}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--ink-2);transition:color .15s}
+  .nav-links a:hover{color:var(--orange)}
+  .nav-cta{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--orange);color:#fff;border:none;
+    padding:11px 18px;border-radius:var(--radius);
+    font-weight:600;font-size:14px;
+    box-shadow:0 1px 0 rgba(0,0,0,.05), 0 1px 2px rgba(234,88,12,.3);
+    transition:background .15s, transform .1s;
+  }
+  .nav-cta:hover{background:var(--orange-700)}
+  .nav-cta:active{transform:translateY(1px)}
+  .nav-phone{font-size:13px;color:var(--muted);font-weight:500}
+  .nav-phone strong{color:var(--ink);font-weight:600}
+  @media (max-width:1080px){.nav-links{display:none}.nav-phone{display:none !important}}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    padding:64px 0 80px;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute;inset:0;z-index:0;
+    background:
+      linear-gradient(180deg, rgba(11,28,48,.86) 0%, rgba(11,28,48,.72) 50%, rgba(11,28,48,.92) 100%),
+      url('assets/hero-warehouse.jpeg') center/cover no-repeat;
+  }
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(234,88,12,.18), transparent 50%),
+      linear-gradient(180deg, transparent 70%, var(--surface) 100%);
+  }
+  .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start}
+  @media (max-width:980px){.hero-inner{grid-template-columns:1fr;gap:32px}}
+
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.18);
+    color:#F6E27A;
+    padding:7px 14px;border-radius:999px;
+    font-size:12px;font-weight:600;letter-spacing:.08em;
+    text-transform:uppercase;
+    margin-bottom:24px;
+  }
+  .hero-eyebrow .dot{width:8px;height:8px;border-radius:50%;background:#F6E27A;box-shadow:0 0 0 4px rgba(246,226,122,.18)}
+  h1.hero-title{
+    font-size:clamp(36px,5vw,56px);
+    line-height:1.04;
+    font-weight:800;
+    color:#fff;
+    margin:0 0 20px;
+    letter-spacing:-.02em;
+  }
+  h1.hero-title em{
+    font-style:normal;
+    color:#F6E27A;
+    background:linear-gradient(180deg, transparent 60%, rgba(246,226,122,.15) 60%);
+    padding:0 4px;
+  }
+  .hero-sub{
+    font-size:18px;
+    color:rgba(255,255,255,.78);
+    margin:0 0 36px;
+    max-width:540px;
+    line-height:1.6;
+  }
+  .hero-trust{
+    display:flex;flex-wrap:wrap;gap:14px 28px;
+    margin-top:32px;
+    padding-top:28px;
+    border-top:1px solid rgba(255,255,255,.12);
+  }
+  .hero-trust-item{
+    display:flex;align-items:center;gap:10px;
+    color:rgba(255,255,255,.88);font-size:14px;font-weight:500;
+  }
+  .hero-trust-item svg{flex-shrink:0;color:#F6E27A}
+  .hero-stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+    margin-top:36px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:var(--radius);
+    padding:20px;
+  }
+  .hero-stat-num{font-size:28px;font-weight:800;color:#fff;line-height:1;letter-spacing:-.02em}
+  .hero-stat-num span{color:var(--orange);font-size:20px;vertical-align:top;margin-left:2px}
+  .hero-stat-label{font-size:12px;color:rgba(255,255,255,.6);margin-top:6px;text-transform:uppercase;letter-spacing:.06em;font-weight:500}
+
+  /* ===== FORM ===== */
+  .form-card{
+    background:#fff;
+    border-radius:12px;
+    padding:28px;
+    box-shadow:var(--shadow-lg), 0 0 0 1px rgba(11,28,48,.04);
+    position:relative;
+  }
+  .form-card::before{
+    content:"";position:absolute;top:-3px;left:24px;right:24px;height:3px;
+    background:var(--orange);border-radius:3px 3px 0 0;
+  }
+  .form-header{margin-bottom:20px}
+  .form-title{font-size:22px;font-weight:700;letter-spacing:-.01em;margin:0 0 6px}
+  .form-sub{font-size:14px;color:var(--muted);margin:0}
+  .form-badge{
+    display:inline-flex;align-items:center;gap:6px;
+    background:rgba(166,126,0,.08);
+    color:var(--yellow);
+    font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:4px 10px;border-radius:999px;margin-bottom:12px;
+    border:1px solid rgba(166,126,0,.2);
+  }
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .form-row{grid-column:1/-1}
+  .form-row.half{grid-column:auto}
+  @media (max-width:520px){.form-grid{grid-template-columns:1fr}.form-row.half{grid-column:1/-1}}
+  label.fld{
+    display:flex;flex-direction:column;gap:6px;
+    font-size:13px;font-weight:600;color:var(--ink-2);
+  }
+  label.fld > span:first-child{display:inline-flex;align-items:center;gap:4px}
+  label.fld .req{color:var(--orange)}
+  .fld input, .fld select{
+    font-family:inherit;font-size:14px;color:var(--ink);
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:11px 13px;
+    transition:border-color .15s, box-shadow .15s;
+    width:100%;
+  }
+  .fld input:focus, .fld select:focus{
+    outline:none;
+    border-color:var(--orange);
+    box-shadow:0 0 0 3px rgba(234,88,12,.12);
+  }
+  .fld input::placeholder{color:#A4AEC0}
+  .fld select{appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A6A82' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;
+  }
+  .form-submit{
+    grid-column:1/-1;
+    background:var(--orange);
+    color:#fff;border:none;
+    padding:14px 20px;
+    font-size:15px;font-weight:700;letter-spacing:.01em;
+    border-radius:var(--radius);
+    margin-top:6px;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    box-shadow:0 1px 2px rgba(234,88,12,.4), inset 0 1px 0 rgba(255,255,255,.18);
+    transition:background .15s, transform .1s, box-shadow .15s;
+  }
+  .form-submit:hover{background:var(--orange-700);box-shadow:0 4px 12px rgba(234,88,12,.35), inset 0 1px 0 rgba(255,255,255,.18)}
+  .form-submit:active{transform:translateY(1px)}
+  .form-foot{
+    grid-column:1/-1;
+    display:flex;align-items:center;gap:8px;
+    font-size:12px;color:var(--muted);margin-top:4px;
+  }
+  .form-foot svg{flex-shrink:0;color:var(--ok)}
+  .form-success{
+    display:none;
+    padding:18px;border-radius:var(--radius);
+    background:rgba(21,128,61,.08);border:1px solid rgba(21,128,61,.2);
+    color:var(--ok);font-size:14px;font-weight:500;
+  }
+  .form-success.show{display:flex;align-items:flex-start;gap:10px}
+  .form-success svg{flex-shrink:0;margin-top:2px}
+
+  /* ===== LOGOS STRIP ===== */
+  .logos{
+    background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    padding:36px 0;
+  }
+  .logos-label{
+    text-align:center;font-size:11px;font-weight:600;letter-spacing:.16em;
+    color:var(--muted);text-transform:uppercase;margin-bottom:24px;
+  }
+  .marquee{
+    position:relative;
+    overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    cursor:grab;
+    user-select:none;
+  }
+  .marquee.dragging{cursor:grabbing}
+  .marquee-track{
+    display:flex;
+    gap:56px;
+    width:max-content;
+    animation:marquee 48s linear infinite;
+    will-change:transform;
+  }
+  .marquee:hover .marquee-track,
+  .marquee.paused .marquee-track{animation-play-state:paused}
+  .marquee.dragging .marquee-track{animation:none}
+  @keyframes marquee{
+    from{transform:translateX(0)}
+    to{transform:translateX(-50%)}
+  }
+  .logo-word{
+    flex-shrink:0;
+    font-weight:700;font-size:19px;
+    color:#94A3B8;letter-spacing:-.01em;
+    transition:color .2s, transform .2s;font-family:'Inter',sans-serif;
+    white-space:nowrap;
+    padding:8px 4px;
+  }
+  .logo-word:hover{color:var(--ink)}
+  .logo-word .accent{color:var(--orange);opacity:.7}
+  .client-logo{
+    flex-shrink:0;
+    height:66px;width:auto;max-width:240px;
+    object-fit:contain;
+    filter:grayscale(1) opacity(.62);
+    transition:filter .25s, transform .25s;
+    pointer-events:none;
+  }
+  .marquee:not(.dragging) .client-logo:hover,
+  .client-logo-wrap:hover .client-logo{filter:grayscale(0) opacity(1);transform:scale(1.04)}
+  .client-logo-wrap{display:flex;align-items:center;justify-content:center;height:96px;padding:0 12px;flex-shrink:0}
+
+  /* ===== SECTIONS ===== */
+  section{padding:88px 0}
+  .section-head{max-width:760px;margin:0 auto 56px;text-align:center}
+  .section-eyebrow{
+    display:inline-block;
+    font-size:12px;font-weight:700;letter-spacing:.16em;
+    color:var(--orange);text-transform:uppercase;margin-bottom:14px;
+  }
+  h2.section-title{
+    font-size:clamp(28px,3.5vw,40px);
+    line-height:1.1;font-weight:800;
+    letter-spacing:-.02em;margin:0 0 14px;
+  }
+  .section-sub{font-size:17px;color:var(--muted);margin:0;line-height:1.6}
+
+  /* ===== PILARES ===== */
+  .pilares{background:var(--surface)}
+  .pilares-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media (max-width:880px){.pilares-grid{grid-template-columns:1fr}}
+  .pilar{
+    background:#fff;border:1px solid var(--line);border-radius:12px;
+    padding:32px 28px;
+    transition:transform .2s, box-shadow .2s, border-color .2s;
+  }
+  .pilar:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);border-color:#D8DEE9}
+  .pilar-icon{
+    width:48px;height:48px;border-radius:10px;
+    background:linear-gradient(135deg,#FFF4ED 0%,#FFE6D2 100%);
+    border:1px solid rgba(234,88,12,.18);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--orange);margin-bottom:20px;
+  }
+  .pilar-num{
+    position:absolute;font-family:'JetBrains Mono',monospace;font-size:11px;
+    color:var(--muted);letter-spacing:.1em;
+  }
+  .pilar h3{font-size:18px;font-weight:700;margin:0 0 10px;letter-spacing:-.01em}
+  .pilar p{font-size:14.5px;color:var(--muted);margin:0;line-height:1.6}
+
+  /* ===== SOLUCIONES ===== */
+  .soluciones{background:var(--surface-2);position:relative;overflow:hidden}
+  .soluciones::before{
+    content:"";position:absolute;inset:0;
+    background-image:linear-gradient(rgba(11,28,48,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(11,28,48,.04) 1px, transparent 1px);
+    background-size:48px 48px;
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    pointer-events:none;
+  }
+  .sol-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+    position:relative;
+  }
+  @media (max-width:980px){.sol-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:640px){.sol-grid{grid-template-columns:1fr}}
+  .sol-card{
+    background:#fff;border-radius:12px;overflow:hidden;
+    border:1px solid var(--line);
+    display:flex;flex-direction:column;
+    transition:transform .25s, box-shadow .25s;
+  }
+  .sol-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+  .sol-media{
+    aspect-ratio:16/10;background:#0B1C30;position:relative;overflow:hidden;
+  }
+  .sol-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .sol-card:hover .sol-media img{transform:scale(1.04)}
+  .sol-badges{
+    position:absolute;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap;
+  }
+  .badge{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+    padding:5px 10px;border-radius:6px;
+    background:rgba(255,255,255,.95);color:var(--ink);
+    backdrop-filter:blur(4px);
+  }
+  .badge.entrega{background:#0B1C30;color:#fff}
+  .badge.entrega .dot{width:6px;height:6px;background:#22C55E;border-radius:50%;box-shadow:0 0 0 3px rgba(34,197,94,.2)}
+  .badge.medida{background:rgba(234,88,12,.95);color:#fff}
+  .badge.seismic{
+    background:#F6E27A;color:#5C4500;
+  }
+  .badge.seismic svg{width:11px;height:11px}
+  .sol-body{padding:22px 22px 24px;flex:1;display:flex;flex-direction:column}
+  .sol-title{font-size:19px;font-weight:700;margin:0 0 8px;letter-spacing:-.01em}
+  .sol-desc{font-size:14.5px;color:var(--muted);margin:0 0 18px;line-height:1.6;flex:1}
+  .sol-specs{
+    display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;
+  }
+  .spec{
+    font-size:11.5px;font-weight:500;color:var(--ink-2);
+    background:var(--surface);
+    border:1px solid var(--line);
+    padding:4px 9px;border-radius:6px;font-family:'JetBrains Mono',monospace;letter-spacing:-.01em;
+  }
+  .sol-link{
+    display:inline-flex;align-items:center;gap:8px;
+    color:var(--orange);font-weight:600;font-size:14px;
+    transition:gap .15s;
+  }
+  .sol-link:hover{gap:12px}
+  .sol-seismic-tag{
+    display:inline-flex;align-items:center;gap:6px;
+    margin-top:12px;padding-top:14px;
+    border-top:1px dashed var(--line);
+    font-size:11.5px;font-weight:600;color:var(--yellow);
+    letter-spacing:.04em;
+  }
+
+  /* ===== SEISMIC SECTION ===== */
+  .seismic{
+    background:linear-gradient(135deg,#0B1C30 0%,#15243A 100%);
+    color:#fff;position:relative;overflow:hidden;
+  }
+  .seismic::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(circle at 80% 20%, rgba(234,88,12,.15), transparent 50%),
+      radial-gradient(circle at 20% 80%, rgba(246,226,122,.08), transparent 50%);
+  }
+  .seismic-inner{
+    position:relative;
+    display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center;
+  }
+  @media (max-width:980px){.seismic-inner{grid-template-columns:1fr;gap:40px}}
+  .seismic-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    background:rgba(246,226,122,.1);
+    border:1px solid rgba(246,226,122,.3);
+    color:#F6E27A;
+    padding:8px 14px;border-radius:6px;
+    font-size:11px;font-weight:700;letter-spacing:.12em;
+    text-transform:uppercase;margin-bottom:24px;
+  }
+  .seismic h2{
+    font-size:clamp(30px,4vw,44px);font-weight:800;
+    line-height:1.1;letter-spacing:-.02em;margin:0 0 20px;color:#fff;
+  }
+  .seismic h2 span{color:#F6E27A}
+  .seismic-text{font-size:17px;color:rgba(255,255,255,.72);line-height:1.65;margin:0 0 28px;max-width:520px}
+  .seismic-points{display:grid;grid-template-columns:1fr 1fr;gap:18px 24px;margin-top:32px}
+  @media (max-width:540px){.seismic-points{grid-template-columns:1fr}}
+  .sp{display:flex;gap:12px;align-items:flex-start}
+  .sp-icon{
+    flex-shrink:0;width:36px;height:36px;border-radius:8px;
+    background:rgba(246,226,122,.12);border:1px solid rgba(246,226,122,.25);
+    display:flex;align-items:center;justify-content:center;color:#F6E27A;
+  }
+  .sp-text strong{display:block;font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+  .sp-text span{font-size:13px;color:rgba(255,255,255,.6);line-height:1.5}
+
+  .seismic-visual{
+    position:relative;border-radius:14px;overflow:hidden;
+    aspect-ratio:4/3;
+    background:#000;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
+  }
+  .seismic-visual img{width:100%;height:100%;object-fit:cover;opacity:.88}
+  .seismic-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, transparent 50%, rgba(11,28,48,.92) 100%);
+  }
+  .seismic-stamp{
+    position:absolute;top:20px;right:20px;
+    background:rgba(11,28,48,.85);backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,.12);
+    padding:12px 14px;border-radius:8px;
+    display:flex;align-items:center;gap:10px;
+    color:#fff;
+  }
+  .seismic-stamp-circle{
+    width:42px;height:42px;border-radius:50%;
+    background:#F6E27A;color:#5C4500;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;
+  }
+  .seismic-stamp-text{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.7)}
+  .seismic-stamp-text strong{display:block;color:#fff;font-size:13px;letter-spacing:0;text-transform:none;margin-top:1px}
+
+  .seismic-meta{
+    position:absolute;bottom:20px;left:20px;right:20px;
+    display:flex;justify-content:space-between;align-items:flex-end;color:#fff;
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;
+  }
+  .seismic-meta .label{color:rgba(255,255,255,.6);text-transform:uppercase}
+  .seismic-meta .value{font-size:14px;font-weight:700;margin-top:2px;font-family:'Inter',sans-serif;letter-spacing:0}
+
+  /* ===== SERVICIOS ===== */
+  .servicios{background:var(--surface)}
+  .serv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  @media (max-width:980px){.serv-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:540px){.serv-grid{grid-template-columns:1fr}}
+  .serv{
+    background:#fff;border:1px solid var(--line);border-radius:12px;
+    padding:28px 24px;
+  }
+  .serv-icon{
+    width:44px;height:44px;border-radius:8px;
+    background:var(--ink);color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:18px;
+  }
+  .serv h4{font-size:16px;font-weight:700;margin:0 0 8px}
+  .serv p{font-size:13.5px;color:var(--muted);margin:0;line-height:1.55}
+
+  /* ===== PROCESO / TIMELINE ===== */
+  .proceso{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .proc-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  }
+  @media (max-width:880px){.proc-grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:540px){.proc-grid{grid-template-columns:1fr}}
+  .proc-step{padding:32px 28px;background:#fff;border-right:1px solid var(--line);position:relative}
+  .proc-step:last-child{border-right:none}
+  @media (max-width:880px){
+    .proc-step:nth-child(2n){border-right:none}
+    .proc-step:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  }
+  .proc-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;color:var(--orange);font-weight:600;letter-spacing:.1em;
+    margin-bottom:14px;
+  }
+  .proc-step h4{font-size:17px;font-weight:700;margin:0 0 8px;letter-spacing:-.01em}
+  .proc-step p{font-size:14px;color:var(--muted);margin:0;line-height:1.55}
+
+  /* ===== TESTIMONIAL ===== */
+  .testimonial{background:var(--surface-2)}
+  .test-slider{
+    max-width:880px;margin:0 auto;position:relative;
+  }
+  .test-viewport{
+    overflow:hidden;border-radius:14px;
+  }
+  .test-rail{
+    display:flex;
+    transition:transform .5s cubic-bezier(.22,.61,.36,1);
+    will-change:transform;
+  }
+  .test-card{
+    flex:0 0 100%;
+    background:#fff;border-radius:14px;padding:48px;
+    box-shadow:var(--shadow-md);
+    border:1px solid var(--line);
+    box-sizing:border-box;
+  }
+  @media (max-width:640px){.test-card{padding:32px 24px}}
+  .test-quote-mark{
+    font-family:Georgia,serif;font-size:64px;color:var(--orange);
+    line-height:1;display:block;margin:0 0 8px;font-weight:700;
+  }
+  .test-quote{
+    font-size:21px;line-height:1.5;font-weight:500;color:var(--ink);
+    margin:0 0 28px;letter-spacing:-.01em;text-wrap:balance;
+  }
+  .test-quote strong{background:linear-gradient(180deg, transparent 60%, rgba(246,226,122,.4) 60%);padding:0 2px}
+  .test-author{display:flex;align-items:center;gap:14px}
+  .test-avatar{
+    width:48px;height:48px;border-radius:50%;
+    background:linear-gradient(135deg,#0B1C30,#1E2E45);
+    color:#fff;display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:16px;letter-spacing:.02em;flex-shrink:0;
+  }
+  .test-name{text-align:left}
+  .test-name strong{display:block;font-size:14px;font-weight:700}
+  .test-name span{font-size:12.5px;color:var(--muted)}
+
+  /* slider controls */
+  .test-nav{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-top:24px;gap:16px;
+  }
+  .test-dots{display:flex;gap:8px;align-items:center}
+  .test-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:rgba(11,28,48,.18);border:none;padding:0;cursor:pointer;
+    transition:background .2s, width .2s;
+  }
+  .test-dot.active{background:var(--orange);width:24px;border-radius:4px}
+  .test-arrows{display:flex;gap:8px}
+  .test-arrow{
+    width:40px;height:40px;border-radius:50%;
+    background:#fff;border:1px solid var(--line);
+    display:inline-flex;align-items:center;justify-content:center;
+    color:var(--ink);cursor:pointer;
+    transition:background .15s, border-color .15s, color .15s;
+  }
+  .test-arrow:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .test-arrow:disabled{opacity:.35;cursor:not-allowed}
+  .test-arrow:disabled:hover{background:#fff;color:var(--ink);border-color:var(--line)}
+
+  /* ===== CTA BANNER ===== */
+  .cta-banner{
+    padding:72px 0;
+    background:#1a1a1a url('assets/cta-bg.png') center/cover no-repeat;
+    color:#fff;position:relative;overflow:hidden;
+    min-height:340px;
+    display:flex;align-items:center;
+  }
+  .cta-banner::before{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(90deg, transparent 0%, transparent 30%, rgba(11,28,48,.5) 55%, rgba(11,28,48,.75) 100%);
+  }
+  .cta-inner{
+    position:relative;
+    display:flex;justify-content:flex-end;
+    width:100%;
+  }
+  .cta-stack{
+    display:flex;flex-direction:column;gap:24px;
+    max-width:560px;width:100%;
+  }
+  .cta-text h3{font-size:clamp(26px,3.2vw,36px);font-weight:800;margin:0 0 12px;letter-spacing:-.02em;line-height:1.1;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.4)}
+  .cta-text p{font-size:15.5px;color:rgba(255,255,255,.85);margin:0;line-height:1.55;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+  .cta-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  @media (max-width:980px){
+    .cta-banner{padding:64px 0 !important;min-height:auto !important;background-position:center center !important}
+    .cta-banner::before{background:linear-gradient(180deg, rgba(11,28,48,.55) 0%, rgba(11,28,48,.88) 60%) !important}
+    .cta-inner{justify-content:center !important;margin:0 !important;padding:0 24px}
+    .cta-stack{max-width:100% !important;gap:20px}
+    .cta-text h3,
+    .cta-text p,
+    .cta-actions a{margin-left:0 !important;margin-right:0 !important}
+    .cta-text p{height:auto !important}
+    .cta-actions{justify-content:flex-start;width:100%}
+    .cta-actions .btn-primary,
+    .cta-actions .btn-ghost{flex:1 1 auto;justify-content:center;min-width:0}
+  }
+  @media (max-width:520px){
+    .cta-actions{flex-direction:column;align-items:stretch}
+    .cta-actions .btn-primary,
+    .cta-actions .btn-ghost{width:100%}
+  }
+  .btn-primary{
+    background:var(--orange);color:#fff;border:none;
+    padding:14px 22px;border-radius:var(--radius);
+    font-weight:700;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;
+    box-shadow:0 4px 12px rgba(234,88,12,.35);transition:background .15s, transform .1s;
+  }
+  .btn-primary:hover{background:var(--orange-700)}
+  .btn-primary:active{transform:translateY(1px)}
+  .btn-ghost{
+    background:transparent;color:#fff;
+    border:1px solid rgba(255,255,255,.25);
+    padding:13px 20px;border-radius:var(--radius);
+    font-weight:600;font-size:14.5px;display:inline-flex;align-items:center;gap:8px;
+    transition:background .15s, border-color .15s;
+  }
+  .btn-ghost:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.4)}
+
+  /* ===== FOOTER ===== */
+  footer{background:#070F1B;color:rgba(255,255,255,.6);padding:56px 0 32px;font-size:14px}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  @media (max-width:880px){.foot-grid{grid-template-columns:1fr 1fr;gap:32px}}
+  @media (max-width:540px){.foot-grid{grid-template-columns:1fr}}
+  .foot-brand img{height:30px;width:auto;margin-bottom:18px;filter:brightness(0) invert(1) opacity(.95)}
+  .foot-brand p{margin:0;max-width:280px;line-height:1.6;font-size:13.5px}
+  .foot-col h5{
+    color:#fff;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+    margin:0 0 18px;
+  }
+  .foot-col a{display:block;margin-bottom:10px;font-size:14px;transition:color .15s}
+  .foot-col a:hover{color:#fff}
+  .foot-contact strong{color:#fff;font-weight:600;font-size:14px;display:block;margin-bottom:2px}
+  .foot-contact div{margin-bottom:14px;line-height:1.5}
+  .foot-bottom{
+    border-top:1px solid rgba(255,255,255,.08);padding-top:24px;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+    font-size:12.5px;color:rgba(255,255,255,.4);
+  }
+  .foot-bottom a:hover{color:#fff}
+
+  /* ===== WHATSAPP FAB ===== */
+  .wa-fab{
+    position:fixed;bottom:24px;right:24px;z-index:60;
+    background:#25D366;color:#fff;
+    padding:14px 18px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:10px;
+    box-shadow:0 6px 20px rgba(37,211,102,.45), 0 0 0 6px rgba(37,211,102,.12);
+    font-weight:600;font-size:14px;
+    transition:transform .15s, box-shadow .15s;
+    text-decoration:none;
+  }
+  .wa-fab:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.55), 0 0 0 8px rgba(37,211,102,.15)}
+  .wa-fab svg{flex-shrink:0}
+  .wa-fab .wa-text{font-size:13px;line-height:1.1}
+  .wa-fab .wa-text strong{display:block;font-weight:700}
+  @media (max-width:520px){.wa-fab .wa-text{display:none}.wa-fab{padding:14px}}
+
+  /* utility */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  /* ===== PRINT OVERRIDES ===== */
+  @page { size: A4; margin: 12mm; }
+  @media print {
+    *, *::before, *::after {
+      -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
+      animation: none !important;
+      transition: none !important;
+    }
+    html, body { background: #fff !important; }
+    /* hide nav stickiness + floating elements */
+    .nav { position: static !important; box-shadow: none; }
+    .wa-fab { display: none !important; }
+    /* hero: convert dark overlay-rich block to compact paged block */
+    .hero { padding: 24px 0 !important; }
+    .hero-bg { position: absolute !important; }
+    /* avoid orphans */
+    section { break-inside: avoid; page-break-inside: avoid; padding: 36px 0 !important; }
+    h1, h2, h3, h4 { break-after: avoid; page-break-after: avoid; }
+    .hero, .seismic, .cta-banner, .pilares, .soluciones, .servicios, .proceso, .testimonial, .logos { break-before: auto; }
+    .sol-card, .pilar, .serv, .proc-step, .test-card { break-inside: avoid; page-break-inside: avoid; }
+    /* marquee: show as static wrapped row */
+    .marquee { -webkit-mask-image: none !important; mask-image: none !important; overflow: visible !important; }
+    .marquee-track { animation: none !important; transform: none !important; flex-wrap: wrap; gap: 28px !important; justify-content: center; }
+    .marquee-track > [aria-hidden="true"] { display: none !important; }
+    .client-logo { filter: grayscale(1) opacity(.85) !important; }
+    /* testimonials: show all cards stacked, hide controls */
+    .test-viewport { overflow: visible !important; }
+    .test-rail { display: block !important; transform: none !important; }
+    .test-card { flex: none !important; margin-bottom: 18px; }
+    .test-nav { display: none !important; }
+    /* hero stats stay legible */
+    .hero-bg::after { background: none !important; }
+    /* footer */
+    footer { background: #f4f4f4 !important; color: #333 !important; padding: 24px 0 !important; }
+    footer .foot-brand img { filter: none !important; }
+    footer * { color: #333 !important; }
+    /* avoid huge blank top */
+    .container { max-width: 100% !important; padding: 0 12mm !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header class="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="nav-brand" aria-label="Rackline inicio">
+      <img src="assets/logo-rackline.png" alt="Rackline — Almacenamiento industrial" class="nav-logo" />
+    </a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#soluciones">Soluciones</a>
+      <a href="#asismica">Norma Sísmica</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Proceso</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:18px">
+      <div class="nav-phone" style="display:inline-flex;align-items:center;gap:8px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#EA580C" aria-hidden="true"><g><path d="M12 1a11 11 0 1 0 11 11 11.013 11.013 0 0 0 -11-11zm3.707 14.707a1 1 0 0 1 -1.414 0l-3-3a1 1 0 0 1 -.293-.707v-6a1 1 0 0 1 2 0v5.586l2.707 2.707a1 1 0 0 1 0 1.414z"/></g></svg>
+        <span>Lun–Vie 8:30–18:00</span>
+        <span style="color:var(--line)">·</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#EA580C" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 006.6 6.6l2.2-2.2a1 1 0 011-.25c1.1.37 2.3.57 3.55.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.55a1 1 0 01-.25 1l-2.22 2.25z"/></svg>
+        <strong>+56 2 2345 6789</strong>
+      </div>
+      <a href="#cotizar" class="nav-cta">
+        Cotizar ahora
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="container hero-inner">
+
+    <div>
+      <span class="hero-eyebrow"><span class="dot"></span>Fabricación nacional · NCh 2369 certificada</span>
+      <h1 class="hero-title">Fabricación nacional de racks industriales con <em>norma sísmica certificada</em>.</h1>
+      <p class="hero-sub">Diseñamos, fabricamos e instalamos soluciones de almacenaje de alta resiliencia para optimizar la capacidad logística de tu empresa. Stock permanente para entrega inmediata.</p>
+
+      <div class="hero-trust">
+        <div class="hero-trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 7v6c0 5 3.5 8.5 9 10 5.5-1.5 9-5 9-10V7l-9-5z"/></svg>
+          Cálculo estructural certificado
+        </div>
+        <div class="hero-trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Despacho desde 72 horas
+        </div>
+        <div class="hero-trust-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h6l3-8 4 16 3-8h4"/></svg>
+          Trato directo con fábrica
+        </div>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num" style="height: 28px">+22<span style="text-align: left; line-height: 1.6; color: rgb(255, 255, 255); margin: 0px 0px 0px 7px">años</span></div>
+          <div class="hero-stat-label">de operación</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">+850</div>
+          <div class="hero-stat-label">proyectos entregados</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">100<span style="line-height: 1.6; color: rgb(255, 255, 255)">%</span></div>
+          <div class="hero-stat-label">acero nacional</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM -->
+    <aside class="form-card" id="cotizar" aria-labelledby="form-title">
+      <div class="form-header">
+        <span class="form-badge">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6.2 4.5L18.2 21 12 16.5 5.8 21l2.4-7.3L2 9.2h7.6z"/></svg>
+          Cotización con ingeniero
+        </span>
+        <h2 class="form-title" id="form-title">Cotiza tu proyecto en 24 hs</h2>
+        <p class="form-sub">Recibe asesoría técnica directa de fábrica. Sin intermediarios.</p>
+      </div>
+
+      <form class="form-grid" id="lead-form" autocomplete="on" novalidate>
+        <label class="fld form-row">
+          <span>Nombre del contacto <span class="req">*</span></span>
+          <input type="text" name="nombre" placeholder="Ej. Juan Pérez" required />
+        </label>
+
+        <label class="fld form-row half">
+          <span>Nombre de la empresa <span class="req">*</span></span>
+          <input type="text" name="empresa" placeholder="Ej. Logística del Sur SpA" required />
+        </label>
+
+        <label class="fld form-row half">
+          <span>RUT empresa <span class="req">*</span></span>
+          <input type="text" name="rut" placeholder="76.123.456-7" required pattern="[0-9kK\.\-]+" /></label>
+
+        <label class="fld form-row half">
+          <span>Correo corporativo <span class="req">*</span></span>
+          <input type="email" name="email" placeholder="nombre@empresa.cl" required />
+        </label>
+
+        <label class="fld form-row half">
+          <span>Teléfono / WhatsApp <span class="req">*</span></span>
+          <input type="tel" name="telefono" placeholder="+56 9 0000 0000" required />
+        </label>
+
+        <label class="fld form-row">
+          <span>Categoría de solución <span class="req">*</span></span>
+          <select name="categoria" required defaultValue="">
+            <option value="" disabled selected>Selecciona una solución</option>
+            <option value="carga-pesada">Racks de carga pesada (Paletización)</option>
+            <option value="medida">Proyectos a medida (Ingeniería completa)</option>
+            <option value="altillos">Altillos, pasarelas y plataformas</option>
+            <option value="entrega-inmediata">Entrega inmediata (Stock)</option>
+            <option value="otros">Estanterías, cantilever u otros</option>
+          </select>
+        </label>
+
+        <button type="submit" class="form-submit">
+          Solicitar cotización
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+
+        <div class="form-foot">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+          Tus datos viajan cifrados. Solo los usamos para esta cotización.
+        </div>
+      </form>
+
+      <div class="form-success" id="form-success" role="status" aria-live="polite">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+        <div>
+          <strong style="display:block;margin-bottom:2px">Solicitud enviada</strong>
+          Un ingeniero de Rackline te contactará en menos de 24 hs hábiles.
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ===== LOGOS STRIP ===== -->
+<section class="logos" style="padding:36px 0">
+  <div class="container">
+    <div class="logos-label">Empresas que ya optimizan su bodega con Rackline</div>
+    <div class="marquee" id="clientes-marquee" role="region" aria-label="Clientes Rackline">
+      <div class="marquee-track" id="clientes-track">
+        <!-- set A -->
+        <span class="client-logo-wrap"><img class="client-logo" src="assets/clientes/c01.png" alt="Cliente Rackline" draggable="false" /></span>
+        <span class="client-logo-wrap"><img class="client-logo" src="assets/clientes/c02.png" alt="Cliente Rackline" draggable="false" /></span>
+        <span class="client-logo-wrap"><img class="client-logo" src="assets/clientes/c03.png" alt="Cliente Rackline" draggable="false" /></span>
+        <span class="client-logo-wrap"><img class="client-logo" src="assets/clientes/c04.png" alt="Cliente Rackline" draggable="false" /></span>
+        <span class="client-logo-wrap"><img class="client-logo" src="assets/clientes/c05.png" alt="Cliente Rackline" draggable="false" /></span>
+        <span class="client-logo-wrap"><img class="client-logo" src="assets/clientes/c06.png" alt="Cliente Rackline" draggable="false" /></span>
+        <span class="client-logo-wrap"><img class="client-logo" src="assets/clientes/c07.png" alt="Cliente Rackline" draggable="false" /></span>
+        <span class="client-logo-wrap"><img class="client-logo" src="assets/clientes/c08.png" alt="Cliente Rackline" draggable="false" /></span>
+        <span class="client-logo-wrap"><img class="client-logo" src="assets/clientes/c09.png" alt="Cliente Rackline" draggable="false" /></span>
+        <span class="client-logo-wrap"><img class="client-logo" src="assets/clientes/c10.png" alt="Cliente Rackline" draggable="false" /></span>
+        <span class="client-logo-wrap"><img class="client-logo" src="assets/clientes/c11.png" alt="Cliente Rackline" draggable="false" /></span>
+        <span class="client-logo-wrap"><img class="client-logo" src="assets/clientes/c12.png" alt="Cliente Rackline" draggable="false" /></span>
+        <span class="client-logo-wrap"><img class="client-logo" src="assets/clientes/c13.png" alt="Cliente Rackline" draggable="false" /></span>
+        <span class="client-logo-wrap"><img class="client-logo" src="assets/clientes/c14.png" alt="Cliente Rackline" draggable="false" /></span>
+        <!-- set B (duplicated for seamless loop) -->
+        <span class="client-logo-wrap" aria-hidden="true"><img class="client-logo" src="assets/clientes/c01.png" alt="" draggable="false" /></span>
+        <span class="client-logo-wrap" aria-hidden="true"><img class="client-logo" src="assets/clientes/c02.png" alt="" draggable="false" /></span>
+        <span class="client-logo-wrap" aria-hidden="true"><img class="client-logo" src="assets/clientes/c03.png" alt="" draggable="false" /></span>
+        <span class="client-logo-wrap" aria-hidden="true"><img class="client-logo" src="assets/clientes/c04.png" alt="" draggable="false" /></span>
+        <span class="client-logo-wrap" aria-hidden="true"><img class="client-logo" src="assets/clientes/c05.png" alt="" draggable="false" /></span>
+        <span class="client-logo-wrap" aria-hidden="true"><img class="client-logo" src="assets/clientes/c06.png" alt="" draggable="false" /></span>
+        <span class="client-logo-wrap" aria-hidden="true"><img class="client-logo" src="assets/clientes/c07.png" alt="" draggable="false" /></span>
+        <span class="client-logo-wrap" aria-hidden="true"><img class="client-logo" src="assets/clientes/c08.png" alt="" draggable="false" /></span>
+        <span class="client-logo-wrap" aria-hidden="true"><img class="client-logo" src="assets/clientes/c09.png" alt="" draggable="false" /></span>
+        <span class="client-logo-wrap" aria-hidden="true"><img class="client-logo" src="assets/clientes/c10.png" alt="" draggable="false" /></span>
+        <span class="client-logo-wrap" aria-hidden="true"><img class="client-logo" src="assets/clientes/c11.png" alt="" draggable="false" /></span>
+        <span class="client-logo-wrap" aria-hidden="true"><img class="client-logo" src="assets/clientes/c12.png" alt="" draggable="false" /></span>
+        <span class="client-logo-wrap" aria-hidden="true"><img class="client-logo" src="assets/clientes/c13.png" alt="" draggable="false" /></span>
+        <span class="client-logo-wrap" aria-hidden="true"><img class="client-logo" src="assets/clientes/c14.png" alt="" draggable="false" /></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PILARES ===== -->
+<section class="pilares" id="pilares">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Ingeniería que respalda</span>
+      <h2 class="section-title">Tres pilares que validan cada metro lineal que fabricamos</h2>
+      <p class="section-sub">No revendemos: somos la fábrica. Cada estructura sale calculada, certificada y lista para operar bajo las exigencias logísticas del mercado chileno.</p>
+    </div>
+
+    <div class="pilares-grid">
+      <div class="pilar">
+        <div class="pilar-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V8l8-5 8 5v12M9 20v-7h6v7"/></svg>
+        </div>
+        <h3>Fabricación propia</h3>
+        <p>Control total del acero nacional, soldadura y pintura electrostática. Sin intermediarios entre la materia prima y la bodega de tu cliente.</p>
+      </div>
+
+      <div class="pilar">
+        <div class="pilar-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h3>Entrega inmediata</h3>
+        <p>Stock permanente de selectivos, mini-racks y estanterías estándar. Empieza a paletizar dentro de la misma semana de pedido.</p>
+      </div>
+
+      <div class="pilar">
+        <div class="pilar-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s-8-4.5-8-12V4l8-2 8 2v6c0 7.5-8 12-8 12z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <h3>Ingeniería calificada</h3>
+        <p>Estructuras calculadas bajo NCh 2369 y EN 15512. Memoria de cálculo y planos firmados por ingeniero estructural en cada proyecto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOLUCIONES ===== -->
+<section class="soluciones" id="soluciones">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Catálogo industrial</span>
+      <h2 class="section-title">Soluciones integrales de almacenaje</h2>
+      <p class="section-sub">Desde paletización selectiva hasta altillos de gran envergadura. Toda nuestra línea cumple con la normativa sísmica chilena.</p>
+    </div>
+
+    <div class="sol-grid">
+
+      <a class="sol-card" href="#cotizar">
+        <div class="sol-media">
+          <img src="assets/selective.jpg" alt="Rack selectivo Porcelanosa" />
+          <div class="sol-badges">
+            <span class="badge entrega"><span class="dot"></span>Entrega inmediata</span>
+          </div>
+        </div>
+        <div class="sol-body">
+          <h3 class="sol-title">Rack Selectivo</h3>
+          <p class="sol-desc">Acceso directo y unitario a cada pallet. Ideal para bodegas con alta diversidad de SKU y rotación heterogénea.</p>
+          <div class="sol-specs">
+            <span class="spec">2.000–4.500 kg/nivel</span>
+            <span class="spec">H. hasta 12 m</span>
+          </div>
+          <span class="sol-link">Cotizar ficha técnica
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+          <div class="sol-seismic-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6.2 4.5L18.2 21 12 16.5 5.8 21l2.4-7.3L2 9.2h7.6z"/></svg>
+            SEISMIC BADGE · NCh 2369
+          </div>
+        </div>
+      </a>
+
+      <a class="sol-card" href="#cotizar">
+        <div class="sol-media">
+          <img src="assets/drive-in.jpeg" alt="Sistema Drive-In Volcán" />
+          <div class="sol-badges">
+            <span class="badge medida">Alta densidad</span>
+          </div>
+        </div>
+        <div class="sol-body">
+          <h3 class="sol-title">Drive-In</h3>
+          <p class="sol-desc">Máxima densificación del espacio: elimina pasillos entre racks. Pensado para productos homogéneos con baja rotación.</p>
+          <div class="sol-specs">
+            <span class="spec">LIFO</span>
+            <span class="spec">+75% capacidad</span>
+          </div>
+          <span class="sol-link">Cotizar ficha técnica
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+          <div class="sol-seismic-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6.2 4.5L18.2 21 12 16.5 5.8 21l2.4-7.3L2 9.2h7.6z"/></svg>
+            SEISMIC BADGE · NCh 2369
+          </div>
+        </div>
+      </a>
+
+      <a class="sol-card" href="#cotizar">
+        <div class="sol-media">
+          <img src="assets/cantilever.jpg" alt="Cantilever Tecnofast" />
+          <div class="sol-badges">
+            <span class="badge medida">Diseño a medida</span>
+          </div>
+        </div>
+        <div class="sol-body">
+          <h3 class="sol-title">Cantilever</h3>
+          <p class="sol-desc">Para cargas largas y pesadas: perfiles, vigas, planchas, tubos y maderas. Brazos en voladizo sin obstrucciones frontales.</p>
+          <div class="sol-specs">
+            <span class="spec">Brazos 1–2,4 m</span>
+            <span class="spec">Cargas &gt;1.500 kg</span>
+          </div>
+          <span class="sol-link">Cotizar ficha técnica
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+          <div class="sol-seismic-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6.2 4.5L18.2 21 12 16.5 5.8 21l2.4-7.3L2 9.2h7.6z"/></svg>
+            SEISMIC BADGE · NCh 2369
+          </div>
+        </div>
+      </a>
+
+      <a class="sol-card" href="#cotizar">
+        <div class="sol-media">
+          <img src="assets/push-back.jpeg" alt="Push-Back Edelmag" />
+          <div class="sol-badges">
+            <span class="badge medida">Alta densidad</span>
+          </div>
+        </div>
+        <div class="sol-body">
+          <h3 class="sol-title">Push-Back</h3>
+          <p class="sol-desc">Almacenamiento dinámico con carros sobre rieles inclinados. Hasta 4 pallets en profundidad por carril, todos accesibles desde el frente.</p>
+          <div class="sol-specs">
+            <span class="spec">LIFO</span>
+            <span class="spec">2–4 pallets/carril</span>
+          </div>
+          <span class="sol-link">Cotizar ficha técnica
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+          <div class="sol-seismic-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6.2 4.5L18.2 21 12 16.5 5.8 21l2.4-7.3L2 9.2h7.6z"/></svg>
+            SEISMIC BADGE · NCh 2369
+          </div>
+        </div>
+      </a>
+
+      <a class="sol-card" href="#cotizar">
+        <div class="sol-media">
+          <img src="assets/altillo.jpeg" alt="Altillo Bridgestone" />
+          <div class="sol-badges">
+            <span class="badge medida">Diseño a medida</span>
+          </div>
+        </div>
+        <div class="sol-body">
+          <h3 class="sol-title">Altillos y plataformas</h3>
+          <p class="sol-desc">Duplica o triplica el área útil aprovechando la altura libre de tu bodega. Diseño estructural completo con escalas y barandas certificadas.</p>
+          <div class="sol-specs">
+            <span class="spec">350–500 kg/m²</span>
+            <span class="spec">1–3 niveles</span>
+          </div>
+          <span class="sol-link">Cotizar ficha técnica
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+          <div class="sol-seismic-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6.2 4.5L18.2 21 12 16.5 5.8 21l2.4-7.3L2 9.2h7.6z"/></svg>
+            SEISMIC BADGE · NCh 2369
+          </div>
+        </div>
+      </a>
+
+      <a class="sol-card" href="#cotizar">
+        <div class="sol-media">
+          <img src="assets/mini-rack.jpeg" alt="Mini-rack El Taller" />
+          <div class="sol-badges">
+            <span class="badge entrega"><span class="dot"></span>Entrega inmediata</span>
+          </div>
+        </div>
+        <div class="sol-body">
+          <h3 class="sol-title">Mini-Rack &amp; Estanterías</h3>
+          <p class="sol-desc">Carga manual o picking dinámico para repuestos, retail y operaciones de e-commerce. Modular, atornillable y reconfigurable.</p>
+          <div class="sol-specs">
+            <span class="spec">150–800 kg/nivel</span>
+            <span class="spec">MDF · acero</span>
+          </div>
+          <span class="sol-link">Cotizar ficha técnica
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+          <div class="sol-seismic-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6.2 4.5L18.2 21 12 16.5 5.8 21l2.4-7.3L2 9.2h7.6z"/></svg>
+            SEISMIC BADGE · NCh 2369
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEISMIC SECTION ===== -->
+<section class="seismic" id="asismica">
+  <div class="container seismic-inner">
+    <div>
+      <span class="seismic-eyebrow">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6.2 4.5L18.2 21 12 16.5 5.8 21l2.4-7.3L2 9.2h7.6z"/></svg>
+        Ingeniería sísmica avanzada
+      </span>
+      <h2>Bodegas que <span>siguen operando</span> después del evento sísmico.</h2>
+      <p class="seismic-text">En Chile, el diseño estructural no es una opción: es una necesidad de supervivencia empresarial. Implementamos sistemas con anclaje base, distanciadores, refuerzos diagonales y arriostramiento certificado bajo <strong style="color:#fff;font-weight:600">NCh 2369.Of2003</strong> — garantizando que tu operación no se detenga ante eventos sísmicos de gran magnitud.</p>
+
+      <div class="seismic-points">
+        <div class="sp">
+          <div class="sp-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20M4 20V8l8-5 8 5v12"/></svg>
+          </div>
+          <div class="sp-text">
+            <strong>Nexo estructural</strong>
+            <span>Conectores de alta tracción que disipan esfuerzos sísmicos.</span>
+          </div>
+        </div>
+        <div class="sp">
+          <div class="sp-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+          </div>
+          <div class="sp-text">
+            <strong>Automatización del cálculo</strong>
+            <span>Modelado FEM por proyecto con factores R sismorresistentes.</span>
+          </div>
+        </div>
+        <div class="sp">
+          <div class="sp-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="sp-text">
+            <strong>Memoria firmada</strong>
+            <span>Cálculo y planos timbrados por ingeniero civil estructural.</span>
+          </div>
+        </div>
+        <div class="sp">
+          <div class="sp-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z"/></svg>
+          </div>
+          <div class="sp-text">
+            <strong>Anclaje certificado</strong>
+            <span>Pernos químicos Hilti HIT o equivalente, según losa.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="seismic-visual">
+      <img src="assets/factory-1.jpeg" alt="Centro de distribución Kolff equipado por Rackline" />
+      <div class="seismic-overlay" aria-hidden="true"></div>
+      <div class="seismic-stamp">
+        <div class="seismic-stamp-circle">NCh</div>
+        <div>
+          <div class="seismic-stamp-text">Certificación<strong>NCh 2369.Of2003</strong></div>
+        </div>
+      </div>
+      <div class="seismic-meta">
+        <div>
+          <div class="label">Resiliencia diseño</div>
+          <div class="value">Escala Richter · 9.5</div>
+        </div>
+        <div style="text-align:right">
+          <div class="label">Vida útil</div>
+          <div class="value">30 años / mantención bianual</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICIOS ===== -->
+<section class="servicios" id="servicios">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Servicios técnicos</span>
+      <h2 class="section-title">Acompañamos cada etapa del proyecto</h2>
+      <p class="section-sub">Diseñamos, fabricamos, instalamos y mantenemos. Un solo proveedor, una sola responsabilidad técnica.</p>
+    </div>
+
+    <div class="serv-grid">
+      <div class="serv">
+        <div class="serv-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/></svg>
+        </div>
+        <h4>Ingeniería llave en mano</h4>
+        <p>Levantamiento en terreno, diseño 3D, cálculo estructural y planos timbrados. Te entregamos la bodega operando.</p>
+      </div>
+      <div class="serv">
+        <div class="serv-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 10h10M7 14h6"/></svg>
+        </div>
+        <h4>Mantenimiento preventivo</h4>
+        <p>Inspecciones periódicas para detectar daños por impacto, fatiga del material o fallas según norma SLP-RR-01-21.</p>
+      </div>
+      <div class="serv">
+        <div class="serv-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <h4>Inspecciones técnicas</h4>
+        <p>Validación de carga y certificación de estanterías existentes por ingeniero calculista, con informe firmado.</p>
+      </div>
+      <div class="serv">
+        <div class="serv-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l4-1 11-11-3-3L4 17l-1 4z"/></svg>
+        </div>
+        <h4>Pintura y reparación</h4>
+        <p>Reacondicionamiento de racks existentes: pintura electrostática, cambio de parantes dañados y refuerzos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROCESO ===== -->
+<section class="proceso" id="proceso">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Proceso</span>
+      <h2 class="section-title">De la primera llamada al pallet en altura</h2>
+      <p class="section-sub">Un proceso transparente, sin sorpresas en factura ni en obra.</p>
+    </div>
+
+    <div class="proc-grid">
+      <div class="proc-step">
+        <div class="proc-num">01 · BRIEF</div>
+        <h4>Visita técnica</h4>
+        <p>Un ingeniero acude a tu bodega, mide alturas, columnas, losa y flujos de operación.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">02 · DISEÑO</div>
+        <h4>Layout y memoria</h4>
+        <p>Te entregamos planos 3D, cálculo estructural y especificaciones técnicas detalladas.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">03 · FABRICACIÓN</div>
+        <h4>Producción en fábrica</h4>
+        <p>Corte, plegado, soldadura y pintura electrostática en nuestra planta de Quilicura.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">04 · OBRA</div>
+        <h4>Montaje certificado</h4>
+        <p>Instalación con cuadrillas propias, anclaje verificado y entrega con protocolo firmado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIO ===== -->
+<section class="testimonial">
+  <div class="container">
+    <div class="test-slider" id="test-slider">
+      <div class="test-viewport">
+        <div class="test-rail" id="test-rail">
+
+          <article class="test-card">
+            <span class="test-quote-mark">“</span>
+            <p class="test-quote">Desde que implementamos la solución de Rackline, nuestra <strong>eficiencia de despacho aumentó en un 35 %</strong>. Lo más importante: la tranquilidad de saber que la infraestructura cumple con los más altos estándares sísmicos del país.</p>
+            <div class="test-author">
+              <div class="test-avatar">RA</div>
+              <div class="test-name">
+                <strong>Ricardo Alcaíno</strong>
+                <span>Gerente de logística · South Logistics Corp</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="test-card">
+            <span class="test-quote-mark">“</span>
+            <p class="test-quote">Compramos drive-in para una bodega de bebidas en Antofagasta. El equipo de Rackline coordinó visita técnica, cálculo y montaje en <strong>tres semanas</strong>. Cero retrasos, cero excusas.</p>
+            <div class="test-author">
+              <div class="test-avatar">MV</div>
+              <div class="test-name">
+                <strong>María Valdés</strong>
+                <span>Jefa de bodega · Embotelladora del Norte</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="test-card">
+            <span class="test-quote-mark">“</span>
+            <p class="test-quote">Comparé tres proveedores. Rackline fue el único que nos entregó <strong>memoria de cálculo firmada</strong> con la cotización inicial. Eso, en una zona sísmica como la nuestra, marca toda la diferencia.</p>
+            <div class="test-author">
+              <div class="test-avatar">JS</div>
+              <div class="test-name">
+                <strong>Jorge Salgado</strong>
+                <span>Comprador senior · Industria Manufacturera Maipo</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="test-card">
+            <span class="test-quote-mark">“</span>
+            <p class="test-quote">Llevamos cuatro proyectos con Rackline en nuestras plantas del sur. Lo que mejor valoramos: <strong>trato directo con fábrica</strong>, sin intermediarios, y mantención preventiva consistente año a año.</p>
+            <div class="test-author">
+              <div class="test-avatar">PC</div>
+              <div class="test-name">
+                <strong>Paulina Court</strong>
+                <span>Gerente de operaciones · Forestal Andina</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="test-card">
+            <span class="test-quote-mark">“</span>
+            <p class="test-quote">Necesitábamos un altillo con escalera y baranda certificada para ayer. Cotizaron en menos de 24 horas y nos instalaron sin detener la operación de la bodega. <strong>Recomendados 10/10</strong>.</p>
+            <div class="test-author">
+              <div class="test-avatar">DM</div>
+              <div class="test-name">
+                <strong>Diego Martínez</strong>
+                <span>Jefe de operaciones · Repuestos AutoMax</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="test-nav">
+        <div class="test-dots" id="test-dots" role="tablist" aria-label="Testimonios"></div>
+        <div class="test-arrows">
+          <button class="test-arrow" id="test-prev" aria-label="Testimonio anterior">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="test-arrow" id="test-next" aria-label="Testimonio siguiente">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA BANNER ===== -->
+<section class="cta-banner" style="background-size: cover; background-position: left center">
+  <div class="container cta-inner" style="margin: 0px 86px">
+    <div class="cta-stack">
+      <div class="cta-text">
+        <h3 style="margin: 0px 0px 12px -100px">¿Listo para optimizar tu bodega
+esta semana?</h3>
+        <p style="height: 47px; margin: 0px 0px 0px -93px">Conéctate con un ingeniero de Rackline. Te entregamos cotización formal con memoria de cálculo en menos de 24 hs hábiles.</p>
+      </div>
+      <div class="cta-actions">
+          <a href="#cotizar" class="btn-primary" style="padding: 14px 22px 14px 23px; margin: 0px 0px 0px -95px">
+            Solicitar visita técnica
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="tel:+56223456789" class="btn-ghost">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+            +56 2 2345 6789
+          </a>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo-rackline.png" alt="Rackline" />
+        <p>Soluciones integrales de almacenaje industrial de alta resiliencia y diseño sísmico avanzado para el mercado chileno.</p>
+      </div>
+
+      <div class="foot-col">
+        <h5>Productos</h5>
+        <a href="#soluciones">Rack selectivo</a>
+        <a href="#soluciones">Drive-In</a>
+        <a href="#soluciones">Cantilever</a>
+        <a href="#soluciones">Push-Back</a>
+        <a href="#soluciones">Altillos</a>
+      </div>
+
+      <div class="foot-col">
+        <h5>Servicios</h5>
+        <a href="#servicios">Mantenimiento preventivo</a>
+        <a href="#asismica">Certificación NCh 2369</a>
+        <a href="#servicios">Montaje industrial</a>
+        <a href="#servicios">Ingeniería de cálculo</a>
+      </div>
+
+      <div class="foot-col foot-contact">
+        <h5>Contacto</h5>
+        <div><strong>Casa matriz</strong>Av. Industrial 4930, Quilicura, Santiago, Chile.</div>
+        <div><strong>Comercial</strong>contacto@rackline.cl</div>
+        <div><strong>Teléfono</strong>+56 2 2345 6789</div>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <div>© 2026 Rackline · Desarrollado por <a href="https://deltadigital.cl/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;text-decoration-color:rgba(255,255,255,.25);transition:color .15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='inherit'">Delta Digital</a>.</div>
+      <div style="display:flex;gap:24px"><a href="#">Términos</a><a href="#">Privacidad</a></div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== WHATSAPP FAB ===== -->
+<a href="https://wa.me/56223456789?text=Hola%20Rackline%2C%20necesito%20cotizar%20un%20proyecto." class="wa-fab" aria-label="Hablar por WhatsApp con un ingeniero">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0012.05 0C5.5 0 .15 5.35.15 11.9c0 2.1.55 4.15 1.6 5.95L0 24l6.3-1.65a11.9 11.9 0 005.75 1.45h.01c6.55 0 11.9-5.35 11.9-11.9 0-3.2-1.25-6.2-3.46-8.4zm-8.45 18.3h-.01c-1.8 0-3.55-.5-5.1-1.4l-.35-.2-3.7.95.95-3.6-.25-.4a9.7 9.7 0 01-1.5-5.25c0-5.4 4.4-9.85 9.85-9.85 2.6 0 5.1 1 6.95 2.85a9.8 9.8 0 012.9 6.95c0 5.45-4.45 9.95-9.85 9.95zm5.45-7.4c-.3-.15-1.75-.85-2.05-.95-.3-.1-.5-.15-.7.15-.2.3-.85.95-1.05 1.15-.2.2-.4.25-.7.1-.3-.15-1.25-.45-2.4-1.45a8.7 8.7 0 01-1.65-2.05c-.15-.3 0-.45.15-.6.15-.15.3-.4.45-.6.15-.2.2-.3.3-.5.1-.2.05-.4 0-.55-.05-.15-.7-1.7-.95-2.3-.25-.6-.5-.5-.7-.5h-.6c-.2 0-.55.1-.85.4-.3.3-1.1 1.05-1.1 2.6 0 1.55 1.15 3.05 1.3 3.25.15.2 2.25 3.45 5.45 4.85.75.35 1.35.55 1.8.7.75.25 1.45.2 2 .15.6-.1 1.75-.7 2-1.4.25-.7.25-1.3.15-1.4-.1-.15-.3-.2-.6-.35z"/></svg>
+  <span class="wa-text">Hablar con<strong>un ingeniero</strong></span>
+</a>
+
+<script>
+  // Form submit handler — fake but realistic  const form = document.getElementById('lead-form');
+  const success = document.getElementById('form-success');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // simple validation
+    const inputs = form.querySelectorAll('input[required], select[required]');
+    let valid = true;
+    inputs.forEach(i => {
+      if (!i.value || (i.type === 'email' && !/^[^@]+@[^@]+\.[^@]+$/.test(i.value))) {
+        i.style.borderColor = '#EA580C';
+        i.style.boxShadow = '0 0 0 3px rgba(234,88,12,.12)';
+        valid = false;
+      } else {
+        i.style.borderColor = '';
+        i.style.boxShadow = '';
+      }
+    });
+    if (!valid) return;
+
+    form.style.display = 'none';
+    success.classList.add('show');
+    // Aquí dispararías el conversion tag de Google Ads
+    if (window.gtag) window.gtag('event','conversion',{'send_to':'AW-XXXX/YYYY'});
+  });
+
+  // ===== Clientes marquee — drag to scroll back/forward =====
+  (function(){
+    const marquee = document.getElementById('clientes-marquee');
+    const track = document.getElementById('clientes-track');
+    if (!marquee || !track) return;
+
+    let isDown = false, startX = 0, currentTx = 0, lastX = 0, animationPaused = false;
+    // Set CSS variable controlled offset on top of the CSS animation by setting transform directly
+    // We pause the animation while dragging and translate manually.
+
+    function getCurrentTranslate(){
+      const m = new DOMMatrixReadOnly(getComputedStyle(track).transform);
+      return m.m41 || 0;
+    }
+
+    marquee.addEventListener('pointerdown', (e) => {
+      isDown = true;
+      marquee.classList.add('dragging');
+      currentTx = getCurrentTranslate();
+      track.style.animation = 'none';
+      track.style.transform = `translateX(${currentTx}px)`;
+      startX = e.clientX;
+      lastX = e.clientX;
+      marquee.setPointerCapture(e.pointerId);
+    });
+
+    marquee.addEventListener('pointermove', (e) => {
+      if (!isDown) return;
+      const dx = e.clientX - startX;
+      let newTx = currentTx + dx;
+      // wrap so it loops infinitely
+      const half = track.scrollWidth / 2;
+      if (newTx > 0) newTx -= half;
+      if (newTx < -half) newTx += half;
+      track.style.transform = `translateX(${newTx}px)`;
+      lastX = e.clientX;
+    });
+
+    function release(e){
+      if (!isDown) return;
+      isDown = false;
+      marquee.classList.remove('dragging');
+      // Resume animation from current position by computing a negative delay
+      const tx = getCurrentTranslate();
+      const half = track.scrollWidth / 2;
+      const progress = -tx / half; // 0..1
+      const duration = 48; // seconds (matches CSS)
+      const delay = -progress * duration;
+      track.style.transform = '';
+      track.style.animation = '';
+      track.style.animationDelay = delay + 's';
+    }
+    marquee.addEventListener('pointerup', release);
+    marquee.addEventListener('pointercancel', release);
+    marquee.addEventListener('pointerleave', release);
+  })();
+
+  // ===== Testimonials slider =====
+  (function(){
+    const rail = document.getElementById('test-rail');
+    const dotsHost = document.getElementById('test-dots');
+    const prev = document.getElementById('test-prev');
+    const next = document.getElementById('test-next');
+    if (!rail || !dotsHost) return;
+
+    const slides = rail.querySelectorAll('.test-card');
+    let idx = 0;
+
+    // build dots
+    slides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'test-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('role','tab');
+      d.setAttribute('aria-label', 'Ir al testimonio ' + (i+1));
+      d.addEventListener('click', () => go(i));
+      dotsHost.appendChild(d);
+    });
+    const dots = dotsHost.querySelectorAll('.test-dot');
+
+    function go(n){
+      idx = (n + slides.length) % slides.length;
+      rail.style.transform = `translateX(-${idx * 100}%)`;
+      dots.forEach((d,i) => d.classList.toggle('active', i === idx));
+      restart();
+    }
+    prev.addEventListener('click', () => go(idx - 1));
+    next.addEventListener('click', () => go(idx + 1));
+
+    // auto-advance
+    let timer;
+    function restart(){
+      clearInterval(timer);
+      timer = setInterval(() => go(idx + 1), 7000);
+    }
+    restart();
+
+    // pause on hover
+    const slider = document.getElementById('test-slider');
+    slider.addEventListener('mouseenter', () => clearInterval(timer));
+    slider.addEventListener('mouseleave', restart);
+
+    // basic swipe
+    let startX = null;
+    rail.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, {passive:true});
+    rail.addEventListener('touchend', (e) => {
+      if (startX == null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1));
+      startX = null;
+    });
+  })();
+</script>
+
+<script>
+  // Auto-print after fonts + load
+  window.addEventListener('load', async () => {
+    if (document.fonts && document.fonts.ready) {
+      try { await document.fonts.ready; } catch (e) {}
+    }
+    setTimeout(() => window.print(), 600);
+  });
+</script>
+
+</body>
+</html>

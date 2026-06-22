@@ -1,0 +1,18 @@
+# Backups y zips viejos (NO deben ir al deploy)
+*.zip
+Rackline*.zip
+*by lewis*.zip
+assets.zip
+
+# Archivos sueltos / temporales
+.thumbnail
+
+# Archivos de Docker (no hace falta copiarlos dentro de la imagen)
+Dockerfile
+docker-compose.yml
+.dockerignore
+README.md
+
+# Control de versiones
+.git
+.gitignore

@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    image: rackline-web:latest
+    container_name: rackline-web
+    ports:
+      - "80:80"
+    restart: unless-stopped
