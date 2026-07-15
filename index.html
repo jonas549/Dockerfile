@@ -1465,6 +1465,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // Aquí dispararías el conversion tag de Google Ads
     if (window.gtag) window.gtag('event','conversion',{'send_to':'AW-XXXX/YYYY'});
 
+    const SHEET_URL = "https://script.google.com/macros/s/AKfycbzDL7FeweIUM8E41ZyVuYqQgkjWlOOMZTAR4XI51_cmcdNFguPBdGxMU4oKoaL_ZivRWQ/exec";
+
+    fetch(SHEET_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        nombre:    form.querySelector('[name="nombre"]').value.trim(),
+        empresa:   form.querySelector('[name="empresa"]').value.trim(),
+        email:     form.querySelector('[name="email"]').value.trim(),
+        telefono:  form.querySelector('[name="telefono"]').value.trim(),
+        categoria: form.querySelector('[name="categoria"]').value
+      }).toString()
+    });
+
     // Redirigir a la vista de agradecimiento, pasando el nombre para personalizar
     const nombre = (form.querySelector('input[name="nombre"]')?.value || '').trim();
     const qs = nombre ? ('?nombre=' + encodeURIComponent(nombre)) : '';
