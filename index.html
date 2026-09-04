@@ -199,7 +199,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   }
   label.fld > span:first-child{display:inline-flex;align-items:center;gap:4px}
   label.fld .req{color:var(--orange)}
-  .fld input, .fld select{
+  .fld input, .fld select, .fld textarea{
     font-family:inherit;font-size:14px;color:var(--ink);
     background:#fff;
     border:1px solid var(--line);
@@ -208,12 +208,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     transition:border-color .15s, box-shadow .15s;
     width:100%;
   }
-  .fld input:focus, .fld select:focus{
+  .fld input:focus, .fld select:focus, .fld textarea:focus{
     outline:none;
     border-color:var(--orange);
     box-shadow:0 0 0 3px rgba(234,88,12,.12);
   }
-  .fld input::placeholder{color:#A4AEC0}
+  .fld input::placeholder, .fld textarea::placeholder{color:#A4AEC0}
+  .fld textarea{resize:vertical;min-height:88px;line-height:1.5}
   .fld select{appearance:none;-webkit-appearance:none;
     background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A6A82' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
     background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;
@@ -867,6 +868,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </select>
         </label>
 
+        <label class="fld form-row">
+          <span>Mensaje (opcional)</span>
+          <textarea name="mensaje" rows="4" placeholder="Cuéntanos medidas, cantidad de posiciones o plazos, si ya los tienes."></textarea>
+        </label>
+
         <button type="submit" class="form-submit">
           Solicitar cotización
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -1448,7 +1454,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     // simple validation
-    const inputs = form.querySelectorAll('input[required], select[required]');
+    const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
     let valid = true;
     inputs.forEach(i => {
       if (!i.value || (i.type === 'email' && !/^[^@]+@[^@]+\.[^@]+$/.test(i.value))) {
@@ -1476,7 +1482,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         empresa:   form.querySelector('[name="empresa"]').value.trim(),
         email:     form.querySelector('[name="email"]').value.trim(),
         telefono:  form.querySelector('[name="telefono"]').value.trim(),
-        categoria: form.querySelector('[name="categoria"]').value
+        categoria: form.querySelector('[name="categoria"]').value,
+        mensaje:   form.querySelector('[name="mensaje"]').value.trim()
       }).toString()
     });
 
