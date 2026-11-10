@@ -714,6 +714,56 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .wa-fab .wa-text strong{display:block;font-weight:700}
   @media (max-width:520px){.wa-fab .wa-text{display:none}.wa-fab{padding:14px}}
 
+  /* ===== FILA FLOTANTE — brochure a la izquierda de WhatsApp ===== */
+  /* El contenedor fijo es el que se posiciona; WhatsApp pasa a static adentro.
+     Así el brochure queda pegado a la izquierda de WhatsApp sin depender del
+     ancho del pill (que cambia con la fuente y con el breakpoint). El
+     contenedor no recibe clics: solo sus botones, para que el hueco entre los
+     dos no bloquee lo que haya detrás. */
+  .fab-row{
+    position:fixed;bottom:24px;right:24px;z-index:60;
+    display:flex;align-items:center;gap:12px;
+    pointer-events:none;
+  }
+  .fab-row > a{pointer-events:auto}
+  .fab-row .wa-fab{position:static}
+
+  /* Acción secundaria: blanco con texto tinta e ícono naranja, para que no
+     compita con el verde de WhatsApp ni con el naranja lleno de "Cotizar".
+     Misma tipografía que .wa-fab y 1px menos de padding vertical para
+     compensar el borde → misma altura que WhatsApp (57px / 50px). */
+  .br-fab{
+    background:#fff;color:var(--ink);
+    padding:13px 18px;border-radius:999px;
+    display:inline-flex;align-items:center;gap:10px;
+    border:1px solid var(--line);
+    box-shadow:var(--shadow-md);
+    font-weight:600;font-size:14px;
+    transition:transform .15s, box-shadow .15s;
+    text-decoration:none;
+  }
+  .br-fab:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+  .br-fab:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+  .br-fab svg{flex-shrink:0;color:var(--orange)}
+  .br-fab .br-text{font-size:13px;line-height:1.1}
+  .br-fab .br-text strong{display:block;font-weight:700}
+  .br-fab .br-short{display:none;font-weight:700;font-size:14px;line-height:1}
+  /* En móvil WhatsApp queda circular; el brochure conserva una palabra ("PDF")
+     porque un ícono de descarga suelto no dice qué se descarga. El borde de 1px
+     se compensa en el padding para igualar los 50px del círculo de WhatsApp. */
+  @media (max-width:520px){
+    .br-fab{padding:13px 16px}
+    .br-fab .br-text{display:none}
+    .br-fab .br-short{display:inline}
+  }
+
+  /* El pie deja libre el alto de toda la pila flotante (fila + "Cotizar" encima
+     + aire), para que al final del scroll ni el crédito ni Términos/Privacidad
+     queden debajo de los botones.
+     Desktop: 24 + 57 + 12 + 57 + 20 = 170. Móvil: 24 + 50 + 12 + 50 + 20 = 156. */
+  footer{padding-bottom:170px}
+  @media (max-width:520px){footer{padding-bottom:156px}}
+
   /* ===== CTA FLOTANTE — vuelve al formulario del hero ===== */
   /* Va apilado ENCIMA del de WhatsApp, en la misma columna derecha. El offset
      depende del alto del pill de WhatsApp, así que ese alto vive acá como
@@ -1505,11 +1555,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
+<!-- ===== FILA FLOTANTE: BROCHURE + WHATSAPP ===== -->
+<!-- `download` fuerza la descarga en vez del visor del navegador (funciona porque
+     el PDF es del mismo origen) y fija el nombre del archivo guardado. -->
+<div class="fab-row">
+<a href="assets/brochure-rackline.pdf" download="Rackline-brochure.pdf" class="br-fab" id="br-fab" type="application/pdf" aria-label="Descargar brochure de Rackline (PDF)">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>
+  <span class="br-text">Descargar<strong>brochure</strong></span>
+  <span class="br-short">PDF</span>
+</a>
+
 <!-- ===== WHATSAPP FAB ===== -->
 <a href="https://wa.me/56947341470?text=Hola%20bienvenidos%20a%20Rackline" class="wa-fab" aria-label="Hablar por WhatsApp con un ingeniero">
   <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 3.5A11.8 11.8 0 0012.05 0C5.5 0 .15 5.35.15 11.9c0 2.1.55 4.15 1.6 5.95L0 24l6.3-1.65a11.9 11.9 0 005.75 1.45h.01c6.55 0 11.9-5.35 11.9-11.9 0-3.2-1.25-6.2-3.46-8.4zm-8.45 18.3h-.01c-1.8 0-3.55-.5-5.1-1.4l-.35-.2-3.7.95.95-3.6-.25-.4a9.7 9.7 0 01-1.5-5.25c0-5.4 4.4-9.85 9.85-9.85 2.6 0 5.1 1 6.95 2.85a9.8 9.8 0 012.9 6.95c0 5.45-4.45 9.95-9.85 9.95zm5.45-7.4c-.3-.15-1.75-.85-2.05-.95-.3-.1-.5-.15-.7.15-.2.3-.85.95-1.05 1.15-.2.2-.4.25-.7.1-.3-.15-1.25-.45-2.4-1.45a8.7 8.7 0 01-1.65-2.05c-.15-.3 0-.45.15-.6.15-.15.3-.4.45-.6.15-.2.2-.3.3-.5.1-.2.05-.4 0-.55-.05-.15-.7-1.7-.95-2.3-.25-.6-.5-.5-.7-.5h-.6c-.2 0-.55.1-.85.4-.3.3-1.1 1.05-1.1 2.6 0 1.55 1.15 3.05 1.3 3.25.15.2 2.25 3.45 5.45 4.85.75.35 1.35.55 1.8.7.75.25 1.45.2 2 .15.6-.1 1.75-.7 2-1.4.25-.7.25-1.3.15-1.4-.1-.15-.3-.2-.6-.35z"/></svg>
   <span class="wa-text">Hablar con<strong>un ingeniero</strong></span>
 </a>
+</div>
 
 <!-- ===== CTA FLOTANTE — vuelve al formulario del hero ===== -->
 <!-- El scroll suave sale gratis de html{scroll-behavior:smooth}, que ya está en
@@ -1537,6 +1598,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       var pasado = !e.isIntersecting && e.boundingClientRect.bottom < 0;
       fab.classList.toggle('is-visible', pasado);
     }, { threshold: 0 }).observe(formHero);
+  })();
+
+  // Medición de la descarga del brochure → GTM. Mismo criterio que Flash Drop:
+  // un evento por acción + `ubicacion`, para que otro botón de descarga futuro
+  // reuse el mismo activador cambiando solo la ubicación. Con `download` la
+  // página no se descarga, así que el push no compite con una navegación.
+  (function () {
+    var br = document.getElementById('br-fab');
+    if (!br) return;
+    br.addEventListener('click', function () {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'descarga_brochure', ubicacion: 'boton-flotante' });
+    });
   })();
 </script>
 
